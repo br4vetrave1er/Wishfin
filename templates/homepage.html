@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="css/styles.css" > -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #8EC5FC;
+            background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+
+        <h1 class="text-2xl font-semibold mb-6 text-center text-indigo-500">User Data Collection Form</h1>
+        <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      <ul>
+        {% for category, message in messages %}
+          <li class="text-2xl text-red-500">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <br>
+        <div>
+            <form method="post" action="/submit">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="name" 
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    placeholder="Enter your Name">
+                <br>
+                <label class="block text-sm font-medium text-gray-700">City</label>
+                <select id="city_id" value="" name="city_id" required 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500">
+                    {%for city in cities %}
+                        <option value="{{city.id}}">{{city.name}}</option>
+                    {% endfor %}
+                </select>
+                
+                <br>
+    
+            </div>
+            <button type="submit"
+                class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow">Submit</button>
+                
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
